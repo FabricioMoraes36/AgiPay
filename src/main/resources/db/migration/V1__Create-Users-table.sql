@@ -1,0 +1,6 @@
+CREATE TABLE Users (
+    id UUID PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    balance DECIMAL(19,2)
+);
