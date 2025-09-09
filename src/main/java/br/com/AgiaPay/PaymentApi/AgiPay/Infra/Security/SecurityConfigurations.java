@@ -1,5 +1,6 @@
 package br.com.AgiaPay.PaymentApi.AgiPay.Infra.Security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,10 +12,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurations {
+
+    @Autowired
+    SecurityFilter securityFilter;
 
     //Config basica para tornar a autenticação stateless
     //Config corrigida para que o metodo post so possa ser chamado caso a role do usuario seja admin
@@ -26,7 +31,10 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers (HttpMethod.POST, "/Users").hasRole("ADMIN")
+                        //Mudança do metodo para .hasAuthority para garantir que a deleção poassa ser feita sem a autoridade estar salva como ROLE_ADMIN
+                        .requestMatchers(HttpMethod.DELETE, "/Users/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
     //Metodo pra pegar o nosso authenticationManager que ja foi gerado pelo spring
