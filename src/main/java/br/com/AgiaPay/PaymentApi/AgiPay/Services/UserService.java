@@ -5,6 +5,7 @@ import br.com.AgiaPay.PaymentApi.AgiPay.Models.UserModel;
 import br.com.AgiaPay.PaymentApi.AgiPay.Repositories.CompanyRepository;
 import br.com.AgiaPay.PaymentApi.AgiPay.Repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -50,6 +51,7 @@ public class UserService {
     }
 
     //Metodo de pessoa para pessoa
+    @Transactional
     public void p2pTransfer(UUID sender, UUID receiver, BigDecimal amount) {
         Optional<UserModel> senderOpt = userRepository.findById(sender);
         Optional<UserModel> receiverOpt = userRepository.findById(receiver);
@@ -67,6 +69,7 @@ public class UserService {
     }
     //Metodo de pessoa para empresa
 
+    @Transactional
     public void b2cTransfer(UUID sender, UUID companyReceiver, BigDecimal amount) {
         UserModel senderOpt = userRepository.findById(sender).orElseThrow(() -> new EntityNotFoundException("A conta de origem não foi encontrada!! Verifique se o id esta correto"));
         CompanyModel companyOpt = companyRepository.findById(companyReceiver).orElseThrow(() -> new EntityNotFoundException("A conta de destino não foi encontrda!! Verifique se o id esta correto"));
