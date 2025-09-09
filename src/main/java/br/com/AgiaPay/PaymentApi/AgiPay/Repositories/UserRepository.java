@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<UserModel, UUID> {
     //Metodo para encontrar o usuario com base no login
-    UserDetails findByEmail(String email);
+    UserModel findByEmail(String email);
 }
