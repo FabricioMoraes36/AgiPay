@@ -4,6 +4,7 @@ package br.com.AgiaPay.PaymentApi.AgiPay.Models;
 //"\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",
 //message = "CPF deve estar no formato XXX.XXX.XXX-XX")
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +41,7 @@ public class UserModel implements UserDetails {
 
     @Column(nullable = false)
     @NotBlank
+    @JsonIgnore
     private String password;
 
     @Column(nullable = false)
