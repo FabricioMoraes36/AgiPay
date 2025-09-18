@@ -51,15 +51,11 @@ public class UserService {
             return dto;
         }
 
-
     public UserResponseDTO alter(UUID id, UserRequestDTO userRequestDTO){
-        UserModel userModel = userRepository.findById(id).orElseThrow(()->
-                new RuntimeException("Id não existe"));
-
+        UserModel userModel = userRepository.findById(id).orElseThrow(()-> new RuntimeException("Id não existe"));
         UserResponseDTO userResponseDTO = toResponseDTO(userModel);
         userResponseDTO = save(userRequestDTO);
-
         return userResponseDTO;
-    }
+        }
     }
 
