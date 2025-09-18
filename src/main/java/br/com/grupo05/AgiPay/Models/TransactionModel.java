@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 @Getter
 @Setter
@@ -28,4 +29,6 @@ public class TransactionModel {
     private UUID receiverId;
     @Column(name = "transaction_value")
     private BigDecimal value;
+    @Column(name = "date")
+    private LocalDateTime date;
 }
