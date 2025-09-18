@@ -28,8 +28,7 @@ public class UserService {
     }
 
     public UserResponseDTO findById(UUID id) {
-        UserModel user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        UserModel user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
         return toResponseDTO(user);
     }
 
