@@ -40,10 +40,13 @@ public class UserController {
         return null;
     }
     @PutMapping("alter/{id}")
-    public ResponseEntity<UserModel> alterByid(@PathVariable UUID id,@RequestBody UserRequestDTO userRequestDTO){
-            UserResponseDTO userResponseDTO = userService.alter(id,userRequestDTO);
-            return ResponseEntity.ok().body(userResponseDTO);
-
-            return null;
+    public ResponseEntity<UserModel> alterByid(@PathVariable UUID id,@RequestBody UserModel user){
+        //return da camada service - sugestão de metodo:
+        // public UserModel alter(UUID id,UserModel user){UserModel findUser = userRepository.findById(id).orElseThrow(() -> new RunTimeException("User not found"));
+        // findUser.setEmail(user.getEmail())
+        // findUser.setUsername(user.getUsername())
+        // findUser.setCpf(user.getCpf())
+        // return userRepository.save(findUser);
+        return null;
     }
 }
