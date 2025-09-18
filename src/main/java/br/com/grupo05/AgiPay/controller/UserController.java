@@ -1,6 +1,9 @@
-package br.com.grupo05.AgiPay.Controller;
+package br.com.grupo05.AgiPay.controller;
 
-import br.com.grupo05.AgiPay.Models.UserModel;
+import br.com.grupo05.AgiPay.dto.UserRequestDTO;
+import br.com.grupo05.AgiPay.dto.UserResponseDTO;
+import br.com.grupo05.AgiPay.model.UserModel;
+import br.com.grupo05.AgiPay.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,19 +12,26 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
-public class UseController {
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
 
     @PostMapping("/create")
-    public ResponseEntity<UserModel> create(@RequestBody UserModel user){
+    public UserResponseDTO create(@RequestBody UserRequestDTO user){
         //return da camada service - sugestão de metodo:
         // public UserModel create(UserModel user){return userRepository.save(user)}
-        return null;
+        return userService.save(user);
     }
     @GetMapping("/list")
-    public ResponseEntity<List<UserModel>> findAll(){
+    public  List<UserResponseDTO> findAll(){
         //return da camada service - sugestão de metodo:
         // public UserModel create(UserModel user){return userRepository.findAll()}
-        return null;
+        return userService.findAll();
     }
     @GetMapping("/list/{id}")
     public ResponseEntity<UserModel> findById(@PathVariable UUID id){

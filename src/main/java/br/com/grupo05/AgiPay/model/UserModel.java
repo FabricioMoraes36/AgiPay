@@ -1,4 +1,4 @@
-package br.com.grupo05.AgiPay.Models;
+package br.com.grupo05.AgiPay.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
@@ -22,7 +22,7 @@ public class UserModel {
     @Column(name = "username",nullable = false)
     private String username;
     @Column(name = "cpf",unique = true,nullable = false)
-    @Pattern(regexp = "\\\\d{3}\\\\.\\\\d{3}\\\\.\\\\d{3}-\\\\d{2}",message = "o CPF deve estar no formato XXX.XXX.XXX-XX")
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}",message = "o CPF deve estar no formato XXX.XXX.XXX-XX")
     private String cpf;
     @Column(name = "email", unique = true,nullable = false)
     private String email;
