@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 @Getter
 @Setter
@@ -25,5 +26,6 @@ public class TransactionModel {
     @Column(name = "receiver",nullable = false)
     @NotBlank
     private UUID receiverId;
-
+    @Column(name = "transaction_value")
+    private BigDecimal value;
 }
