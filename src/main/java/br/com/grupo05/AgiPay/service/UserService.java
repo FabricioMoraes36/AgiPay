@@ -7,6 +7,7 @@ import br.com.grupo05.AgiPay.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,8 +27,7 @@ public class UserService {
 
     }
 
-
-    public UserResponseDTO findById(Long id) {
+    public UserResponseDTO findById(UUID id) {
         UserModel user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
         return toResponseDTO(user);
@@ -42,7 +42,6 @@ public class UserService {
         return toResponseDTO(save);
 
     }
-
 
     private UserResponseDTO toResponseDTO(UserModel user) {
             UserResponseDTO dto = new UserResponseDTO();
