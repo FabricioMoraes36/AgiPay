@@ -23,30 +23,21 @@ public class UserController {
 
     @PostMapping("/create")
     public UserResponseDTO create(@RequestBody UserRequestDTO user){
-        //return da camada service - sugestão de metodo:
-        // public UserModel create(UserModel user){return userRepository.save(user)}
         return userService.save(user);
     }
     @GetMapping("/list")
     public  List<UserResponseDTO> findAll(){
-        //return da camada service - sugestão de metodo:
-        // public UserModel create(UserModel user){return userRepository.findAll()}
         return userService.findAll();
     }
     @GetMapping("/list/{id}")
-    public ResponseEntity<UserModel> findById(@PathVariable UUID id){
-        //return da camada service - sugestão de metodo:
-        // public Optional<UserModel> findByid(UUID id){return userRepository.findByid(id).orElsethrow(() -> new EntityNotFoundException())}
-        return null;
+    public ResponseEntity<UserResponseDTO> findById(@PathVariable UUID id){
+        UserResponseDTO userResponseDTO = userService.findById(id);
+        return ResponseEntity.ok(userResponseDTO);
     }
     @PutMapping("alter/{id}")
-    public ResponseEntity<UserModel> alterByid(@PathVariable UUID id,@RequestBody UserModel user){
-        //return da camada service - sugestão de metodo:
-        // public UserModel alter(UUID id,UserModel user){UserModel findUser = userRepository.findById(id).orElseThrow(() -> new RunTimeException("User not found"));
-        // findUser.setEmail(user.getEmail())
-        // findUser.setUsername(user.getUsername())
-        // findUser.setCpf(user.getCpf())
-        // return userRepository.save(findUser);
-        return null;
+    public ResponseEntity<UserResponseDTO> alter2(@PathVariable UUID id, @RequestBody UserRequestDTO userRequestDTO){
+        UserResponseDTO userResponseDTO = userService.alter(id,userRequestDTO);
+        return ResponseEntity.ok().body(userResponseDTO);
     }
+
 }
