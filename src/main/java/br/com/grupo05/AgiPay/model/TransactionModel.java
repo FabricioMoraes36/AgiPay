@@ -1,4 +1,4 @@
-package br.com.grupo05.AgiPay.Models;
+package br.com.grupo05.AgiPay.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -21,14 +21,19 @@ public class TransactionModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID transactionId;
+
     @Column(name = "sender",nullable = false)
     @NotBlank
     private UUID senderId;
+
     @Column(name = "receiver",nullable = false)
     @NotBlank
     private UUID receiverId;
+
     @Column(name = "transaction_value")
     private BigDecimal value;
+
     @Column(name = "date")
     private LocalDateTime date;
+
 }
